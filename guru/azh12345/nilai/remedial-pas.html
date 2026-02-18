@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Remedial PAS - iGuru-DTI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a2540'/><text x='50' y='70' font-size='70' text-anchor='middle' fill='%23b68b40' font-family='Arial' font-weight='bold'>iG</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background: #f1f5f9; color: #1e293b; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+        :root { --navy: #0a2540; --slate: #5f6b7a; --gold: #b68b40; --light: #f1f5f9; --white: #ffffff; --dark: #1e293b; --shadow: 0 10px 30px -10px rgba(0,0,0,0.15); }
+        
+        .container { max-width: 1280px; margin: 0 auto; padding: 1.5rem; width: 100%; flex: 1; position: relative; }
+        
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: var(--navy);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .back-btn:hover { background: #1d3a5c; transform: translateX(-3px); }
+        .title { font-size: 1.8rem; color: var(--navy); font-weight: 600; }
+        .title span { color: var(--gold); font-size: 1rem; background: #f1f5f9; padding: 0.3rem 1rem; border-radius: 40px; margin-left: 1rem; }
+        
+        /* INFO CARD */
+        .info-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .info-icon {
+            background: var(--navy);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        .info-text h4 { font-size: 0.9rem; color: var(--slate); font-weight: 500; }
+        .info-text p { font-size: 1.2rem; color: var(--navy); font-weight: 600; }
+        
+        /* FILTER */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            background: #f8fafc;
+            padding: 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+        .filter-input, .filter-select {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            background: white;
+            flex: 1 1 200px;
+        }
+        .filter-input:focus, .filter-select:focus { border-color: var(--gold); outline: none; }
+        .filter-btn {
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .reset-btn {
+            background: #e2e8f0;
+            color: var(--dark);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* STATUS BADGE */
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .badge.tuntas { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        
+        /* TABLE */
+        .table-container {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            border-radius: 20px;
+            border: 2px solid #edf2f7;
+            background: white;
+            position: relative;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+            font-size: 0.9rem;
+        }
+        th {
+            background: var(--navy);
+            color: white;
+            padding: 1rem 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
+            text-align: center;
+        }
+        td:first-child, th:first-child { text-align: left; }
+        td:nth-child(2), th:nth-child(2) { text-align: left; }
+        tbody tr:nth-child(even) { background: #f8fafc; }
+        tbody tr:hover { background: #e9eef3; }
+        
+        /* NILAI IMPROVEMENT */
+        .improvement {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        /* BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--navy);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 100;
+        }
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #backToTop:hover {
+            background: #1d3a5c;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; text-align: center; }
+            .title span { display: block; margin: 0.5rem 0 0; }
+            .filter-bar { flex-direction: column; }
+            .filter-btn, .reset-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <a href="../guru/azh12345.html?tab=nilai" class="back-btn">←</a>
+            <div class="title">
+                📙 Remedial PAS
+            </div>
+        </div>
+
+        <!-- INFO CARD -->
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-icon">📊</div>
+                <div class="info-text">
+                    <h4>Total Data</h4>
+                    <p id="totalData">Memuat...</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📚</div>
+                <div class="info-text">
+                    <h4>Kelas</h4>
+                    <p id="totalKelas">-</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📈</div>
+                <div class="info-text">
+                    <h4>Rata2 Awal</h4>
+                    <p id="rataAwal">-</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🎯</div>
+                <div class="info-text">
+                    <h4>Rata2 Akhir</h4>
+                    <p id="rataAkhir">-</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">⬆️</div>
+                <div class="info-text">
+                    <h4>Peningkatan</h4>
+                    <p id="peningkatan">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <input type="text" class="filter-input" id="searchNama" placeholder="Cari nama siswa...">
+            <select class="filter-select" id="filterKelas">
+                <option value="all">Semua Kelas</option>
+                <option value="8A">8A</option>
+                <option value="9A">9A</option>
+                <option value="9B">9B</option>
+                <option value="9C">9C</option>
+                <option value="9D">9D</option>
+            </select>
+            <button class="filter-btn" id="applyFilter">Terapkan</button>
+            <button class="reset-btn" id="resetFilter">Reset</button>
+        </div>
+
+        <!-- TABLE CONTAINER -->
+        <div class="table-container" id="tableContainer">
+            <table id="nilaiTable">
+                <thead id="tableHeader"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- BACK TO TOP BUTTON -->
+        <button id="backToTop" title="Kembali ke atas">↑</button>
+    </div>
+
+    <script>
+        // KONFIGURASI
+        const SPREADSHEET_ID = '1YlGB2Kiu0BOtWjRXgm7NwcQgxO6K9crzPXuevcasvjc';
+        const SHEET_NAME = 'Remedial_PAS';
+        const URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}`;
+
+        let originalData = { headers: [], rows: [] };
+        let currentData = { headers: [], rows: [] };
+
+        // ==================== FETCH DATA ====================
+        async function fetchData() {
+            try {
+                const response = await fetch(URL);
+                const csvText = await response.text();
+                parseData(csvText);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem;">Gagal memuat data. Periksa koneksi atau coba lagi.</td></tr>';
+            }
+        }
+
+        function parseData(csvText) {
+            const lines = csvText.trim().split('\n');
+            if (lines.length < 2) {
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="7" style="text-align:center;">Data tidak ditemukan</td></tr>';
+                return;
+            }
+
+            // Header (baris 1)
+            const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+            
+            // Data mulai baris 2
+            const dataRows = lines.slice(1).map(line => {
+                return line.split(',').map(cell => cell.replace(/"/g, '').trim());
+            });
+
+            originalData = { headers, rows: dataRows };
+            currentData = { headers: [...headers], rows: [...dataRows] };
+            
+            renderTable();
+            updateInfo();
+        }
+
+        // ==================== RENDER TABLE ====================
+        function renderTable() {
+            const thead = document.getElementById('tableHeader');
+            const tbody = document.getElementById('tableBody');
+            
+            if (!currentData.rows.length) {
+                thead.innerHTML = '<tr><th>Data tidak tersedia</th></tr>';
+                tbody.innerHTML = '';
+                return;
+            }
+
+            // Header
+            thead.innerHTML = '<tr>' + currentData.headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+
+            // Body
+            tbody.innerHTML = currentData.rows.map(row => {
+                // Status di index 6 (STATUS)
+                const status = row[6] || '';
+                const statusClass = status === 'TUNTAS' ? 'tuntas' : '';
+                
+                // Nilai awal (PAS) dan akhir
+                const nilaiAwal = parseFloat(row[3]) || 0;
+                const nilaiAkhir = parseFloat(row[5]) || 0;
+                const peningkatan = nilaiAkhir - nilaiAwal;
+                
+                return '<tr>' + row.map((cell, idx) => {
+                    if (cell === '' || cell === null) return '<td>-</td>';
+                    
+                    // Kolom STATUS (index 6) - tampilkan badge
+                    if (idx === 6) {
+                        return `<td><span class="badge ${statusClass}">${cell}</span></td>`;
+                    }
+                    // Kolom NILAI_AKHIR (index 5) - tambah indikator
+                    if (idx === 5) {
+                        return `<td><strong>${cell}</strong> <span class="improvement">(+${peningkatan})</span></td>`;
+                    }
+                    return `<td>${cell}</td>`;
+                }).join('') + '</tr>';
+            }).join('');
+        }
+
+        // ==================== UPDATE INFO ====================
+        function updateInfo() {
+            const total = currentData.rows.length;
+            document.getElementById('totalData').innerText = total + ' siswa';
+            
+            // Hitung jumlah kelas unik
+            const kelasIndex = 2; // KELAS di index 2
+            const nilaiAwalIndex = 3; // NILAI_PAS di index 3
+            const nilaiAkhirIndex = 5; // NILAI_AKHIR di index 5
+            
+            const kelasSet = new Set();
+            let totalNilaiAwal = 0;
+            let totalNilaiAkhir = 0;
+            let count = 0;
+            
+            currentData.rows.forEach(row => {
+                if (row[kelasIndex]) kelasSet.add(row[kelasIndex]);
+                
+                const nilaiAwal = parseFloat(row[nilaiAwalIndex]);
+                const nilaiAkhir = parseFloat(row[nilaiAkhirIndex]);
+                
+                if (!isNaN(nilaiAwal) && !isNaN(nilaiAkhir)) {
+                    totalNilaiAwal += nilaiAwal;
+                    totalNilaiAkhir += nilaiAkhir;
+                    count++;
+                }
+            });
+            
+            document.getElementById('totalKelas').innerText = kelasSet.size;
+            
+            const avgAwal = count > 0 ? (totalNilaiAwal / count).toFixed(2) : '-';
+            const avgAkhir = count > 0 ? (totalNilaiAkhir / count).toFixed(2) : '-';
+            
+            document.getElementById('rataAwal').innerText = avgAwal;
+            document.getElementById('rataAkhir').innerText = avgAkhir;
+            
+            if (count > 0) {
+                const peningkatan = (totalNilaiAkhir - totalNilaiAwal) / count;
+                document.getElementById('peningkatan').innerText = '+' + peningkatan.toFixed(2);
+            } else {
+                document.getElementById('peningkatan').innerText = '-';
+            }
+        }
+
+        // ==================== FILTER ====================
+        function applyFilter() {
+            const search = document.getElementById('searchNama').value.toLowerCase();
+            const kelas = document.getElementById('filterKelas').value;
+            
+            const namaIndex = 1; // NAMA_SISWA di index 1
+            const kelasIndex = 2; // KELAS di index 2
+            
+            let filtered = originalData.rows.filter(row => {
+                const matchNama = !search || (row[namaIndex] && row[namaIndex].toLowerCase().includes(search));
+                const matchKelas = kelas === 'all' || row[kelasIndex] === kelas;
+                return matchNama && matchKelas;
+            });
+            
+            currentData.rows = filtered;
+            renderTable();
+            updateInfo();
+        }
+
+        function resetFilter() {
+            document.getElementById('searchNama').value = '';
+            document.getElementById('filterKelas').value = 'all';
+            currentData.rows = [...originalData.rows];
+            renderTable();
+            updateInfo();
+        }
+
+        // ==================== BACK TO TOP ====================
+        const backToTopBtn = document.getElementById('backToTop');
+        const tableContainer = document.getElementById('tableContainer');
+
+        tableContainer.addEventListener('scroll', () => {
+            if (tableContainer.scrollTop > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            tableContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== INIT ====================
+        document.getElementById('applyFilter').addEventListener('click', applyFilter);
+        document.getElementById('resetFilter').addEventListener('click', resetFilter);
+        
+        // Load data
+        fetchData();
+
+        // Handle tab parameter dari URL (untuk kembali ke tab yang benar)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab') || 'nilai';
+        document.querySelector('.back-btn').href = `../guru/azh12345.html?tab=${tab}`;
+    </script>
+</body>
+</html>
