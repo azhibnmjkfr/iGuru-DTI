@@ -7,187 +7,1062 @@
     <!-- SEO -->
     <meta name="description" content="Portofolio digital Ahmad Zamanhuri, S.Pd., guru Bahasa Inggris di MTsT Daarut Tahfizh Al-Ikhlas.">
     <meta name="keywords" content="guru, Bahasa Inggris, portofolio, iGuru, DTI">
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a2540'/><text x='50' y='70' font-size='70' text-anchor='middle' fill='%23b68b40' font-family='Arial' font-weight='bold'>iG</text></svg>">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* RESET & VARIABEL PREMIUM - SAMA DENGAN INDEX */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         body { background: #f1f5f9; color: #1e293b; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
-        :root { --navy: #0a2540; --slate: #5f6b7a; --gold: #b68b40; --light: #f1f5f9; --white: #ffffff; --dark: #1e293b; --shadow: 0 10px 30px -10px rgba(0,0,0,0.15); }
+        
+        :root { 
+            --navy: #0a2540; 
+            --slate: #5f6b7a; 
+            --gold: #b68b40; 
+            --light: #f1f5f9; 
+            --white: #ffffff; 
+            --dark: #1e293b; 
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px -15px rgba(10,37,64,0.25);
+        }
+        
+        html { scroll-behavior: smooth; }
         
         .container { max-width: 1280px; margin: 0 auto; padding: 1.5rem; width: 100%; flex: 1; }
         
-        /* HEADER */
-        .header-profile { display: flex; align-items: center; gap: 1.5rem; background: var(--white); padding: 1.5rem 2rem; border-radius: 50px; box-shadow: var(--shadow); margin-bottom: 2rem; flex-wrap: wrap; }
-        .back-btn { background: var(--navy); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; transition: 0.2s; }
-        .back-btn:hover { background: #1d3a5c; transform: translateX(-3px); }
-        .profile-avatar { width: 80px; height: 80px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 600; border: 4px solid var(--gold); }
-        .profile-name h1 { font-size: 1.8rem; color: var(--navy); margin-bottom: 0.3rem; }
-        .profile-name p { color: var(--slate); font-weight: 500; }
+        /* HEADER PREMIUM */
+        .header-profile { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.5rem; 
+            background: var(--white); 
+            padding: 1.5rem 2rem; 
+            border-radius: 60px; 
+            box-shadow: var(--shadow); 
+            margin-bottom: 2rem; 
+            flex-wrap: wrap;
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .header-profile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--navy));
+        }
+        .back-btn { 
+            background: var(--navy); 
+            color: white; 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.8rem; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .back-btn:hover { 
+            background: #1d3a5c; 
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(10,37,64,0.3);
+        }
+        .back-btn i { transition: transform 0.3s ease; }
+        .back-btn:hover i { transform: translateX(-3px); }
         
-        /* TABS DESKTOP */
-        .tabs-desktop { display: flex; background: var(--white); border-radius: 60px; padding: 0.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; flex-wrap: wrap; }
-        .tab-desktop { flex: 1; padding: 1rem 0.5rem; text-align: center; font-weight: 600; color: var(--slate); cursor: pointer; border-radius: 50px; transition: 0.2s; background: transparent; border: none; font-size: 1rem; }
-        .tab-desktop.active { background: var(--navy); color: white; }
-        .tab-desktop:hover:not(.active) { background: #e9eef3; color: var(--navy); }
+        .profile-avatar { 
+            width: 90px; 
+            height: 90px; 
+            background: linear-gradient(135deg, var(--navy), #1d3a5c);
+            color: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2.8rem; 
+            font-weight: 600; 
+            border: 4px solid var(--gold);
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .header-profile:hover .profile-avatar {
+            transform: scale(1.02);
+            border-color: white;
+        }
+        .profile-name h1 { 
+            font-size: 2rem; 
+            color: var(--navy); 
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--navy), #1d3a5c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .profile-name p { 
+            color: var(--slate); 
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .profile-name p i { color: var(--gold); }
         
-        /* CONTENT */
-        .tab-content { background: var(--white); border-radius: 32px; padding: 2rem; box-shadow: var(--shadow); margin-bottom: 5rem; }
+        /* TABS DESKTOP PREMIUM */
+        .tabs-desktop { 
+            display: flex; 
+            background: var(--white); 
+            border-radius: 60px; 
+            padding: 0.6rem; 
+            box-shadow: var(--shadow); 
+            margin-bottom: 2rem; 
+            flex-wrap: wrap;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .tab-desktop { 
+            flex: 1; 
+            padding: 1rem 0.5rem; 
+            text-align: center; 
+            font-weight: 600; 
+            color: var(--slate); 
+            cursor: pointer; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+            background: transparent; 
+            border: none; 
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .tab-desktop i { font-size: 1.2rem; }
+        .tab-desktop.active { 
+            background: var(--navy); 
+            color: white;
+            box-shadow: 0 4px 10px rgba(10,37,64,0.2);
+        }
+        .tab-desktop:hover:not(.active) { 
+            background: #e9eef3; 
+            color: var(--navy);
+            transform: translateY(-2px);
+        }
+        
+        /* CONTENT PREMIUM */
+        .tab-content { 
+            background: var(--white); 
+            border-radius: 40px; 
+            padding: 2rem; 
+            box-shadow: var(--shadow); 
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), var(--navy));
+        }
         .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .tab-pane.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* FILTER */
-        .filter-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; background: #f8fafc; padding: 1.2rem; border-radius: 40px; margin-bottom: 1.5rem; align-items: center; }
-        .filter-input, .filter-select { padding: 0.8rem 1.2rem; border: 2px solid #e2e8f0; border-radius: 40px; font-size: 0.95rem; background: white; flex: 1 1 150px; }
-        .filter-input:focus, .filter-select:focus { border-color: var(--gold); }
-        .filter-btn { background: var(--navy); color: white; border: none; padding: 0.8rem 1.8rem; border-radius: 40px; font-weight: 600; cursor: pointer; }
-        .reset-btn { background: #e2e8f0; color: var(--dark); border: none; padding: 0.8rem 1.8rem; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        /* FILTER PREMIUM */
+        .filter-bar { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.8rem; 
+            background: #f8fafc; 
+            padding: 1.2rem; 
+            border-radius: 50px; 
+            margin-bottom: 1.5rem; 
+            align-items: center;
+            border: 2px solid #e9eef3;
+        }
+        .filter-input, .filter-select { 
+            padding: 0.9rem 1.2rem; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 50px; 
+            font-size: 0.95rem; 
+            background: white; 
+            flex: 1 1 150px;
+            transition: all 0.3s ease;
+        }
+        .filter-input:focus, .filter-select:focus { 
+            border-color: var(--gold); 
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(182, 139, 64, 0.1);
+            transform: translateY(-2px);
+        }
+        .filter-btn, .reset-btn { 
+            padding: 0.9rem 2rem; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .filter-btn { 
+            background: var(--navy); 
+            color: white;
+        }
+        .filter-btn:hover { 
+            background: #1d3a5c; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -5px rgba(10,37,64,0.3);
+        }
+        .reset-btn { 
+            background: #e2e8f0; 
+            color: var(--dark);
+        }
+        .reset-btn:hover { 
+            background: #cbd5e1; 
+            transform: translateY(-2px);
+        }
         
-        /* TABLE */
-        .table-container { overflow-x: auto; max-height: 500px; overflow-y: auto; border-radius: 20px; border: 2px solid #edf2f7; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { background: var(--navy); color: white; padding: 1rem; position: sticky; top: 0; }
-        td { padding: 0.8rem 1rem; border-bottom: 1px solid #e2e8f0; }
-        tbody tr { cursor: pointer; transition: 0.1s; }
-        tbody tr:hover { background: #e9eef3; }
+        /* TABLE PREMIUM */
+       /* TABLE PREMIUM - FIXED HEADER SMOOTH SCROLL */
+.table-container { 
+    overflow-x: auto; 
+    overflow-y: auto; 
+    max-height: 500px; 
+    border-radius: 24px; 
+    border: 2px solid #edf2f7;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) #e9eef3;
+    position: relative;
+    background: white;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-container::-webkit-scrollbar { 
+    width: 8px; 
+    height: 8px; 
+}
+
+.table-container::-webkit-scrollbar-track { 
+    background: #e9eef3; 
+    border-radius: 10px; 
+}
+
+.table-container::-webkit-scrollbar-thumb { 
+    background: var(--gold); 
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover { 
+    background: var(--navy); 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 600px; 
+    position: relative;
+}
+
+/* STICKY HEADER PERFECT */
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--navy);
+}
+
+th { 
+    background: var(--navy); 
+    color: white; 
+    padding: 1rem 1.2rem; 
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    text-align: left;
+    border-bottom: 3px solid var(--gold);
+    /* Fix untuk gap saat scroll */
+    box-shadow: 0 2px 0 0 var(--gold);
+    position: relative;
+}
+
+/* Efek premium di header */
+th i { 
+    margin-right: 0.5rem;
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+/* Kolom pertama dan terakhir tetap rapi */
+th:first-child {
+    border-top-left-radius: 22px;
+}
+
+th:last-child {
+    border-top-right-radius: 22px;
+}
+
+/* BODY TABLE */
+tbody tr { 
+    cursor: pointer; 
+    transition: all 0.2s ease;
+    background: white;
+}
+
+tbody tr:hover { 
+    background: linear-gradient(135deg, #f8fafc, #e9eef3);
+    transform: scale(1.002);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Hover effect untuk sel */
+tbody tr:hover td {
+    border-bottom-color: transparent;
+}
+
+td { 
+    padding: 0.9rem 1.2rem; 
+    border-bottom: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+    background: inherit;
+    position: relative;
+}
+
+/* Garis bawah yang lebih smooth */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Efek garis bawah saat hover */
+tbody tr td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+tbody tr:hover td:first-child::before {
+    opacity: 1;
+}
+
+/* Badge status premium */
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 80px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.status-badge.aktif {
+    background: #10b981;
+    color: white;
+}
+
+.status-badge.aktif i {
+    color: white;
+    margin-right: 0.2rem;
+}
+
+.status-badge.tidak-aktif {
+    background: #ef4444;
+    color: white;
+}
+
+.status-badge.tidak-aktif i {
+    color: white;
+    margin-right: 0.2rem;
+}
+
+.status-badge.lainnya {
+    background: #6b7280;
+    color: white;
+}
+
+/* Kelas badge */
+.kelas-badge {
+    background: #e9eef3;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.kelas-badge i {
+    color: var(--gold);
+    margin-right: 0.3rem;
+    font-size: 0.7rem;
+}
+
+/* Link WhatsApp */
+.wa-link {
+    color: #25D366;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.wa-link:hover {
+    background: rgba(37, 211, 102, 0.1);
+    transform: translateY(-1px);
+}
+
+.wa-link i {
+    font-size: 1.1rem;
+}
+
+/* Empty state dan loading */
+.table-empty-state {
+    text-align: center;
+    padding: 3rem !important;
+}
+
+.table-empty-state i {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.table-empty-state p {
+    color: var(--slate);
+    font-size: 1rem;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e9eef3;
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Counter siswa */
+.siswa-counter {
+    margin-top: 1rem;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+}
+
+.siswa-counter i {
+    color: var(--gold);
+}
+
+/* Fix untuk Firefox agar sticky header sempurna */
+@supports (position: sticky) {
+    thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+}
+
+/* Fix untuk Edge/IE */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    thead {
+        position: relative;
+    }
+}
         
-        /* STATS */
-        .stats-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: #f8fafc; flex: 1 1 160px; padding: 1.2rem; border-radius: 30px; border: 1px solid #e9eef3; }
-        .stat-card h3 { font-size: 2rem; color: var(--navy); }
+        /* STATS PREMIUM */
+        .stats-grid { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+            margin-bottom: 2rem; 
+        }
+        .stat-card { 
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            flex: 1 1 160px; 
+            padding: 1.5rem; 
+            border-radius: 30px; 
+            border: 2px solid #e9eef3;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+        }
+        .stat-card h3 { 
+            font-size: 2.2rem; 
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+        .stat-card p { 
+            color: var(--slate);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+        .stat-card p i { color: var(--gold); }
         
-        /* CARD GRID UNTUK JURNAL (3 CARD) */
-        .jurnal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-        .jurnal-card { background: #f8fafc; padding: 1.8rem; border-radius: 30px; border: 2px solid #e9eef3; transition: 0.3s; cursor: pointer; text-align: center; text-decoration: none; display: block; color: inherit; }
-        .jurnal-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: var(--shadow); }
-        .jurnal-icon { font-size: 2.8rem; margin-bottom: 1rem; }
-        .jurnal-card h3 { font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
-        .jurnal-card p { color: var(--slate); font-weight: 500; font-size: 0.95rem; }
+        /* JURNAL GRID PREMIUM */
+        .jurnal-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        .jurnal-card { 
+            background: #f8fafc; 
+            padding: 2rem; 
+            border-radius: 30px; 
+            border: 2px solid #e9eef3; 
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            cursor: pointer; 
+            text-align: center; 
+            text-decoration: none; 
+            display: block; 
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .jurnal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--navy));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .jurnal-card:hover::before {
+            transform: scaleX(1);
+        }
+        .jurnal-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--gold); 
+            box-shadow: var(--shadow-hover); 
+        }
+        .jurnal-icon { 
+            font-size: 3.2rem; 
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .jurnal-card:hover .jurnal-icon {
+            transform: scale(1.1);
+        }
+        .jurnal-card h3 { 
+            font-size: 1.3rem; 
+            color: var(--navy); 
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .jurnal-card:hover h3 {
+            color: var(--gold);
+        }
+        .jurnal-card p { 
+            color: var(--slate); 
+            font-weight: 500; 
+            font-size: 0.95rem;
+        }
         
-        /* CARD GRID UNTUK NILAI (7 CARD) */
-        .nilai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-        .nilai-card { background: #f8fafc; padding: 1.5rem; border-radius: 30px; border: 2px solid #e9eef3; transition: 0.3s; cursor: pointer; text-align: center; text-decoration: none; display: block; color: inherit; }
-        .nilai-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: var(--shadow); }
-        .nilai-card.rekap { grid-column: span 3; background: linear-gradient(145deg, #0a2540, #1d3a5c); color: white; }
+        /* NILAI GRID PREMIUM */
+        .nilai-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        .nilai-card { 
+            background: #f8fafc; 
+            padding: 1.8rem; 
+            border-radius: 30px; 
+            border: 2px solid #e9eef3; 
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            cursor: pointer; 
+            text-align: center; 
+            text-decoration: none; 
+            display: block; 
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .nilai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--navy));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .nilai-card:hover::before {
+            transform: scaleX(1);
+        }
+        .nilai-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--gold); 
+            box-shadow: var(--shadow-hover); 
+        }
+        .nilai-card.rekap { 
+            grid-column: span 3; 
+            background: linear-gradient(135deg, #0a2540, #1d3a5c); 
+            color: white; 
+        }
         .nilai-card.rekap h3 { color: white; }
         .nilai-card.rekap p { color: #e9eef3; }
-        .nilai-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
-        .nilai-card h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.3rem; }
-        .nilai-card p { color: var(--slate); font-weight: 500; }
+        .nilai-card.rekap .nilai-icon { color: var(--gold); }
+        .nilai-icon { 
+            font-size: 2.8rem; 
+            margin-bottom: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        .nilai-card:hover .nilai-icon {
+            transform: scale(1.1);
+        }
+        .nilai-card h3 { 
+            font-size: 1.2rem; 
+            color: var(--navy); 
+            margin-bottom: 0.3rem;
+            transition: color 0.3s ease;
+        }
+        .nilai-card:hover h3:not(.rekap h3) {
+            color: var(--gold);
+        }
+        .nilai-card p { 
+            color: var(--slate); 
+            font-weight: 500;
+        }
         
-        /* ADMIN GRID */
-        .admin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        .admin-card { background: #f8fafc; padding: 2rem; border-radius: 40px; text-align: center; border: 2px solid #e9eef3; transition: 0.3s; }
-        .admin-card:hover { border-color: var(--gold); }
-        .admin-icon { font-size: 3rem; }
-        .admin-link { display: inline-block; background: var(--navy); color: white; text-decoration: none; padding: 0.8rem 2rem; border-radius: 50px; margin-top: 1rem; }
+        /* ADMIN GRID PREMIUM */
+        .admin-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 2rem; 
+        }
+        .admin-card { 
+            background: #f8fafc; 
+            padding: 2.5rem; 
+            border-radius: 40px; 
+            text-align: center; 
+            border: 2px solid #e9eef3; 
+            transition: all 0.4s ease;
+        }
+        .admin-card:hover { 
+            border-color: var(--gold); 
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        .admin-icon { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .admin-card:hover .admin-icon {
+            transform: scale(1.1);
+            color: var(--gold);
+        }
+        .admin-card h3 { 
+            color: var(--navy); 
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .admin-link { 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--navy); 
+            color: white; 
+            text-decoration: none; 
+            padding: 0.9rem 2rem; 
+            border-radius: 50px; 
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .admin-link:hover { 
+            background: #1d3a5c; 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px -5px rgba(10,37,64,0.3);
+            border-color: var(--gold);
+        }
+        .admin-link i { transition: transform 0.3s ease; }
+        .admin-link:hover i { transform: translateX(5px); }
         
-        /* HALAMAN JURNAL DETAIL (TABEL PENUH) */
+        /* JURNAL DETAIL PREMIUM */
         .jurnal-detail { display: none; }
-        .jurnal-detail.active { display: block; }
-        .back-to-jurnal { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy); color: white; text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 50px; margin-bottom: 1.5rem; border: none; cursor: pointer; font-size: 1rem; font-weight: 500; }
-        .back-to-jurnal:hover { background: #1d3a5c; }
-        .jurnal-title { color: var(--navy); margin-bottom: 1.5rem; font-size: 1.8rem; }
+        .jurnal-detail.active { display: block; animation: slideIn 0.4s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
         
-        /* BOTTOM NAV */
-        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: white; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); padding: 0.5rem; z-index: 100; border-radius: 30px 30px 0 0; }
-        .bottom-nav-items { display: flex; justify-content: space-around; max-width: 500px; margin: 0 auto; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; background: none; border: none; padding: 0.5rem; font-size: 0.75rem; color: var(--slate); cursor: pointer; width: 20%; border-radius: 20px; }
-        .nav-item span { font-size: 1.3rem; }
-        .nav-item.active { color: var(--gold); background: #f1f5f9; }
+        .back-to-jurnal { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            background: var(--navy); 
+            color: white; 
+            text-decoration: none; 
+            padding: 1rem 2rem; 
+            border-radius: 50px; 
+            margin-bottom: 1.5rem; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .back-to-jurnal:hover { 
+            background: #1d3a5c; 
+            transform: translateX(-5px);
+            box-shadow: 0 8px 20px rgba(10,37,64,0.3);
+        }
+        .back-to-jurnal i { transition: transform 0.3s ease; }
+        .back-to-jurnal:hover i { transform: translateX(-5px); }
         
+        .jurnal-title { 
+            color: var(--navy); 
+            margin-bottom: 1.5rem; 
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .jurnal-title i { color: var(--gold); }
+        
+        /* MODAL PREMIUM (COPY DARI INDEX) */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 1000; 
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .modal.active { display: flex; }
+        .modal-content { 
+            background: var(--white); 
+            max-width: 600px; 
+            width: 90%; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            border-radius: 32px; 
+            padding: 2rem; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); 
+            position: relative; 
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        @keyframes modalPop { 
+            0% { opacity: 0; transform: scale(0.9) translateY(10px); } 
+            100% { opacity: 1; transform: scale(1) translateY(0); } 
+        }
+        .close-modal { 
+            position: absolute; 
+            top: 1.2rem; 
+            right: 1.5rem; 
+            font-size: 1.8rem; 
+            cursor: pointer; 
+            color: var(--slate); 
+            line-height: 1; 
+            background: #f1f5f9;
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 50%; 
+            transition: all 0.3s ease;
+        }
+        .close-modal:hover { 
+            background: var(--navy); 
+            color: white;
+            transform: rotate(90deg);
+        }
+        .modal h2 { 
+            margin-bottom: 1.5rem; 
+            color: var(--navy); 
+            border-left: 6px solid var(--gold); 
+            padding-left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--navy);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+            border-left: 4px solid var(--gold);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast i { color: var(--gold); }
+        
+        /* BOTTOM NAV PREMIUM */
+        .bottom-nav { 
+            display: none; 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: white; 
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1); 
+            padding: 0.8rem 0.5rem; 
+            z-index: 100; 
+            border-radius: 30px 30px 0 0;
+            border-top: 2px solid var(--gold);
+        }
+        .bottom-nav-items { 
+            display: flex; 
+            justify-content: space-around; 
+            max-width: 500px; 
+            margin: 0 auto; 
+        }
+        .nav-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background: none; 
+            border: none; 
+            padding: 0.5rem; 
+            font-size: 0.75rem; 
+            color: var(--slate); 
+            cursor: pointer; 
+            width: 20%; 
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            gap: 0.2rem;
+        }
+        .nav-item i { 
+            font-size: 1.5rem; 
+            margin-bottom: 0.2rem;
+        }
+        .nav-item.active { 
+            color: var(--gold); 
+            background: #f1f5f9;
+            transform: translateY(-5px);
+        }
+        .nav-item:hover:not(.active) {
+            color: var(--navy);
+            background: #f8fafc;
+        }
+        
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .tabs-desktop { display: none; }
             .bottom-nav { display: block; }
-            .container { padding: 1rem; padding-bottom: 5rem; }
-            .header-profile { flex-direction: column; text-align: center; }
+            .container { padding: 1rem; padding-bottom: 6rem; }
+            .header-profile { flex-direction: column; text-align: center; gap: 1rem; }
+            .profile-name p { justify-content: center; }
             .jurnal-grid { grid-template-columns: 1fr; }
             .nilai-grid { grid-template-columns: repeat(2, 1fr); }
             .nilai-card.rekap { grid-column: span 2; }
             .admin-grid { grid-template-columns: 1fr; }
+            .stats-grid { flex-direction: column; }
+            .stat-card { width: 100%; }
         }
         @media (max-width: 480px) {
             .nilai-grid { grid-template-columns: 1fr; }
             .nilai-card.rekap { grid-column: span 1; }
+            .profile-avatar { width: 70px; height: 70px; font-size: 2rem; }
+            .profile-name h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Memuat data...</span>
+    </div>
+
     <div class="container">
-        <!-- HEADER -->
+        <!-- HEADER PREMIUM -->
         <div class="header-profile">
-            <a href="../index.html" class="back-btn">←</a>
+            <a href="../index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
             <div class="profile-avatar">AZ</div>
             <div class="profile-name">
-                <h1>Ahmad Zamanhuri, S.Pd.</h1>
-                <p>NIP: 1945300181075 | Bahasa Inggris | ID: Azh12345</p>
+                <h1><i class="fas fa-chalkboard-teacher" style="color: var(--gold); font-size: 1.8rem;"></i> Ahmad Zamanhuri, S.Pd.</h1>
+                <p>
+                    <i class="fas fa-id-card"></i> NIP: 1945300181075 
+                    <i class="fas fa-book-open" style="margin-left: 0.5rem;"></i> Bahasa Inggris 
+                    <i class="fas fa-qrcode" style="margin-left: 0.5rem;"></i> ID: Azh12345
+                </p>
             </div>
         </div>
 
         <!-- TABS DESKTOP -->
         <div class="tabs-desktop" id="tabsDesktop">
-            <button class="tab-desktop active" data-tab="profil">📋 Profil</button>
-            <button class="tab-desktop" data-tab="siswa">👥 Siswa</button>
-            <button class="tab-desktop" data-tab="jurnal">📝 Jurnal</button>
-            <button class="tab-desktop" data-tab="nilai">📊 Nilai</button>
-            <button class="tab-desktop" data-tab="admin">📁 Administrasi</button>
+            <button class="tab-desktop active" data-tab="profil"><i class="fas fa-user"></i> Profil</button>
+            <button class="tab-desktop" data-tab="siswa"><i class="fas fa-users"></i> Siswa</button>
+            <button class="tab-desktop" data-tab="jurnal"><i class="fas fa-book"></i> Jurnal</button>
+            <button class="tab-desktop" data-tab="nilai"><i class="fas fa-chart-bar"></i> Nilai</button>
+            <button class="tab-desktop" data-tab="admin"><i class="fas fa-folder"></i> Administrasi</button>
         </div>
 
         <!-- CONTENT -->
         <div class="tab-content">
-            <!-- TAB PROFIL (TIDAK DIUBAH) -->
+            <!-- TAB PROFIL -->
             <div class="tab-pane active" id="tab-profil">
-                <h2 style="color: var(--navy);">👤 Profil Guru</h2>
+                <h2 style="color: var(--navy); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <i class="fas fa-user-graduate" style="color: var(--gold);"></i> Profil Guru
+                </h2>
                 <div class="stats-grid">
-                    <div class="stat-card"><h3 id="totalSiswa">116</h3><p>Total Siswa</p></div>
-                    <div class="stat-card"><h3>5</h3><p>Kelas</p></div>
-                    <div class="stat-card"><h3 id="rataNilai">84.2</h3><p>Rata2 Nilai</p></div>
+                    <div class="stat-card">
+                        <h3 id="totalSiswa">116</h3>
+                        <p><i class="fas fa-users"></i> Total Siswa</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>5</h3>
+                        <p><i class="fas fa-layer-group"></i> Kelas</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="rataNilai">84.2</h3>
+                        <p><i class="fas fa-star"></i> Rata-rata Nilai</p>
+                    </div>
                 </div>
-                <table style="width:100%">
-                    <tr><td style="font-weight:600;">Nama</td><td>Ahmad Zamanhuri, S.Pd.</td></tr>
-                    <tr><td>NIP</td><td>1945300181075</td></tr>
-                    <tr><td>Mapel</td><td>Bahasa Inggris</td></tr>
-                    <tr><td>Jabatan</td><td>Guru Bahasa Inggris</td></tr>
-                    <tr><td>No HP</td><td>6282246077307</td></tr>
-                    <tr><td>Email</td><td>ahmadzamanhuri.jakfar@gmail.com</td></tr>
-                </table>
+                <div style="background: #f8fafc; border-radius: 30px; padding: 1.5rem; border: 2px solid #e9eef3;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr><td style="font-weight:600; width:150px;"><i class="fas fa-user" style="color: var(--gold); margin-right: 0.5rem;"></i>Nama</td><td>Ahmad Zamanhuri, S.Pd.</td></tr>
+                        <tr><td style="font-weight:600;"><i class="fas fa-id-card" style="color: var(--gold); margin-right: 0.5rem;"></i>NIP</td><td>1945300181075</td></tr>
+                        <tr><td style="font-weight:600;"><i class="fas fa-book" style="color: var(--gold); margin-right: 0.5rem;"></i>Mapel</td><td>Bahasa Inggris</td></tr>
+                        <tr><td style="font-weight:600;"><i class="fas fa-briefcase" style="color: var(--gold); margin-right: 0.5rem;"></i>Jabatan</td><td>Guru Bahasa Inggris</td></tr>
+                        <tr><td style="font-weight:600;"><i class="fas fa-phone-alt" style="color: var(--gold); margin-right: 0.5rem;"></i>No HP</td><td>6282246077307</td></tr>
+                        <tr><td style="font-weight:600;"><i class="fas fa-envelope" style="color: var(--gold); margin-right: 0.5rem;"></i>Email</td><td>ahmadzamanhuri.jakfar@gmail.com</td></tr>
+                    </table>
+                </div>
             </div>
 
             <!-- TAB SISWA -->
-            <div class="tab-pane" id="tab-siswa">
-                <h2 style="color: var(--navy);">👥 Data Siswa</h2>
-                <div class="filter-bar">
-                    <input type="text" class="filter-input" id="searchNama" placeholder="Cari nama...">
-                    <select class="filter-select" id="filterKelas">
-                        <option value="all">Semua Kelas</option>
-                        <option value="8A">8A</option>
-                        <option value="9A">9A</option>
-                        <option value="9B">9B</option>
-                        <option value="9C">9C</option>
-                        <option value="9D">9D</option>
-                    </select>
-                    <button class="filter-btn" id="applyFilter">Terapkan</button>
-                    <button class="reset-btn" id="resetFilter">Reset</button>
-                </div>
-                <div class="table-container">
-                    <table id="siswaTable">
-                        <thead id="siswaThead"><tr><th>Memuat data...</th></tr></thead>
-                        <tbody id="siswaTbody"></tbody>
-                    </table>
-                </div>
-                <p id="siswaCount" style="margin-top:1rem; color:var(--slate);"></p>
-            </div>
+            <!-- Di bagian TAB SISWA, ganti bagian tabel dengan ini: -->
+<div class="tab-pane" id="tab-siswa">
+    <h2 style="color: var(--navy); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+        <i class="fas fa-users" style="color: var(--gold);"></i> Data Siswa
+    </h2>
+    <div class="filter-bar">
+        <i class="fas fa-search" style="color: var(--slate);"></i>
+        <input type="text" class="filter-input" id="searchNama" placeholder="Cari nama...">
+        <select class="filter-select" id="filterKelas">
+            <option value="all">Semua Kelas</option>
+            <option value="8A">8A</option>
+            <option value="9A">9A</option>
+            <option value="9B">9B</option>
+            <option value="9C">9C</option>
+            <option value="9D">9D</option>
+        </select>
+        <button class="filter-btn" id="applyFilter"><i class="fas fa-filter"></i> Terapkan</button>
+        <button class="reset-btn" id="resetFilter"><i class="fas fa-undo-alt"></i> Reset</button>
+    </div>
+    <div class="table-container">
+        <table id="siswaTable">
+            <thead id="siswaThead">
+                <tr>
+                    <th>NISN</th>
+                    <th>NAMA SISWA</th>
+                    <th>KELAS</th>
+                    <th>JK</th>
+                    <th>STATUS</th>
+                    <th>NO WA ORTU</th>
+                </tr>
+            </thead>
+            <tbody id="siswaTbody">
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 3rem;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--gold);"></i>
+                        <p style="margin-top: 1rem; color: var(--slate);">Memuat data siswa...</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="siswaCount" style="margin-top:1rem; color:var(--slate); display: flex; align-items: center; gap: 0.3rem; justify-content: flex-end;">
+        <i class="fas fa-database" style="color: var(--gold);"></i> 
+        <span id="siswaCountText">Memuat data...</span>
+    </div>
+</div>
 
-            <!-- TAB JURNAL (3 CARD) + DETAIL VIEW -->
+            <!-- TAB JURNAL -->
             <div class="tab-pane" id="tab-jurnal">
-                <!-- Grid Card (tampil default) -->
+                <!-- Grid Card -->
                 <div id="jurnalGridContainer">
-                    <h2 style="color: var(--navy); margin-bottom: 1.5rem;">📝 Jurnal Mengajar</h2>
+                    <h2 style="color: var(--navy); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <i class="fas fa-book" style="color: var(--gold);"></i> Jurnal Mengajar
+                    </h2>
                     <div class="jurnal-grid" id="jurnalGrid"></div>
                 </div>
                 
-                <!-- Detail View (tampil saat card diklik) -->
+                <!-- Detail View -->
                 <div id="jurnalDetailContainer" class="jurnal-detail">
-                    <button class="back-to-jurnal" id="backToJurnalGrid">← Kembali ke Jurnal</button>
-                    <h2 class="jurnal-title" id="jurnalDetailTitle"></h2>
+                    <button class="back-to-jurnal" id="backToJurnalGrid">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Jurnal
+                    </button>
+                    <h2 class="jurnal-title"><i class="fas fa-file-alt"></i> <span id="jurnalDetailTitle"></span></h2>
                     <div class="table-container">
                         <table id="jurnalDetailTable">
                             <thead id="jurnalDetailThead"></thead>
@@ -197,25 +1072,33 @@
                 </div>
             </div>
 
-            <!-- TAB NILAI (7 CARD LINK) -->
+            <!-- TAB NILAI -->
             <div class="tab-pane" id="tab-nilai">
-                <h2 style="color: var(--navy); margin-bottom: 1.5rem;">📊 Data Nilai</h2>
+                <h2 style="color: var(--navy); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <i class="fas fa-chart-bar" style="color: var(--gold);"></i> Data Nilai
+                </h2>
                 <div class="nilai-grid" id="nilaiGrid"></div>
             </div>
 
-            <!-- TAB ADMINISTRASI (TIDAK DIUBAH) -->
+            <!-- TAB ADMINISTRASI -->
             <div class="tab-pane" id="tab-admin">
-                <h2 style="color: var(--navy);">📁 Administrasi</h2>
+                <h2 style="color: var(--navy); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <i class="fas fa-folder" style="color: var(--gold);"></i> Administrasi
+                </h2>
                 <div class="admin-grid">
                     <div class="admin-card">
-                        <div class="admin-icon">📚</div>
+                        <div class="admin-icon"><i class="fas fa-book-open"></i></div>
                         <h3>Materi Kelas</h3>
-                        <a href="#" class="admin-link" target="_blank" id="linkMateri">Kunjungi</a>
+                        <a href="#" class="admin-link" target="_blank" id="linkMateri">
+                            Kunjungi <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                     <div class="admin-card">
-                        <div class="admin-icon">📸</div>
+                        <div class="admin-icon"><i class="fas fa-images"></i></div>
                         <h3>Galeri Kelas</h3>
-                        <a href="#" class="admin-link" target="_blank" id="linkGaleri">Kunjungi</a>
+                        <a href="#" class="admin-link" target="_blank" id="linkGaleri">
+                            Kunjungi <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -224,11 +1107,11 @@
         <!-- BOTTOM NAV MOBILE -->
         <div class="bottom-nav">
             <div class="bottom-nav-items">
-                <button class="nav-item active" data-tab="profil"><span>📋</span> Profil</button>
-                <button class="nav-item" data-tab="siswa"><span>👥</span> Siswa</button>
-                <button class="nav-item" data-tab="jurnal"><span>📝</span> Jurnal</button>
-                <button class="nav-item" data-tab="nilai"><span>📊</span> Nilai</button>
-                <button class="nav-item" data-tab="admin"><span>📁</span> Adm</button>
+                <button class="nav-item active" data-tab="profil"><i class="fas fa-user"></i> Profil</button>
+                <button class="nav-item" data-tab="siswa"><i class="fas fa-users"></i> Siswa</button>
+                <button class="nav-item" data-tab="jurnal"><i class="fas fa-book"></i> Jurnal</button>
+                <button class="nav-item" data-tab="nilai"><i class="fas fa-chart-bar"></i> Nilai</button>
+                <button class="nav-item" data-tab="admin"><i class="fas fa-folder"></i> Adm</button>
             </div>
         </div>
     </div>
@@ -236,13 +1119,25 @@
     <!-- MODAL PROFIL SISWA -->
     <div class="modal" id="modalSiswa">
         <div class="modal-content">
-            <button class="close-modal" id="closeSiswaModal">&times;</button>
-            <h2 id="modalSiswaNama">Profil Siswa</h2>
+            <button class="close-modal" id="closeSiswaModal"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-graduate"></i> <span id="modalSiswaNama">Profil Siswa</span></h2>
             <div id="modalSiswaContent"></div>
         </div>
     </div>
 
     <script>
+        // ==================== TOAST FUNCTION ====================
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        function showToast(message, isSuccess = true) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         // ==================== KONFIGURASI SPREADSHEET ====================
         const SHEETS = {
             profil: '1P3D1ZsC1qO65B0OoPnyOckJe6SUG9CnhtCpoYtKYtJs',
@@ -253,11 +1148,13 @@
         // ==================== FUNGSI FETCH CSV ====================
         async function fetchCSV(url) {
             try {
+                showToast('Memuat data...');
                 const response = await fetch(url);
                 const csvText = await response.text();
                 return parseCSV(csvText);
             } catch (error) {
                 console.error('Fetch error:', error);
+                showToast('Gagal memuat data', false);
                 return { headers: [], rows: [] };
             }
         }
@@ -276,20 +1173,22 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
+            
             document.querySelectorAll('.tab-desktop').forEach(t => t.classList.remove('active'));
             document.querySelector(`.tab-desktop[data-tab="${tabId}"]`).classList.add('active');
+            
             document.querySelectorAll('.nav-item').forEach(m => m.classList.remove('active'));
             document.querySelector(`.nav-item[data-tab="${tabId}"]`).classList.add('active');
             
-            // Reset jurnal detail saat pindah tab
             if (tabId === 'jurnal') {
                 showJurnalGrid();
             }
             
-            // Load data siswa jika perlu
             if (tabId === 'siswa' && document.getElementById('siswaTbody').children.length === 0) {
                 loadDataSiswa();
             }
+            
+            showToast(`Tab ${tabId} dibuka`);
         }
 
         document.querySelectorAll('.tab-desktop, .nav-item').forEach(el => {
@@ -297,138 +1196,164 @@
         });
 
         // ==================== TAB SISWA ====================
-        let dataSiswaFull = [];
+        // ==================== TAB SISWA ====================
+let dataSiswaFull = [];
 
-        async function loadDataSiswa() {
-            const url = `https://docs.google.com/spreadsheets/d/${SHEETS.profil}/gviz/tq?tqx=out:csv&sheet=data_siswa`;
-            const { headers, rows } = await fetchCSV(url);
-            
-            if (headers.length > 0) {
-                // Render header
-                document.getElementById('siswaThead').innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
-                
-                // Simpan data
-                dataSiswaFull = rows.map(row => {
-                    let obj = {};
-                    headers.forEach((h, i) => obj[h] = row[i] || '-');
-                    return obj;
-                });
-                
-                renderSiswa(dataSiswaFull);
-            }
-        }
-
-        function renderSiswa(data) {
-            const tbody = document.getElementById('siswaTbody');
-            if (!data.length) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Tidak ada data</td></tr>';
-                document.getElementById('siswaCount').innerText = '0 siswa';
-                return;
-            }
-            
-            tbody.innerHTML = data.map(s => `
-                <tr data-nisn="${s.NISN}">
-                    <td>${s.NISN}</td>
-                    <td>${s['NAMA SISWA']}</td>
-                    <td>${s.KELAS}</td>
-                    <td>${s['JENIS KELAMIN']}</td>
-                    <td>${s['STATUS SISWA']}</td>
-                    <td>${s['NO WA ORTU']}</td>
-                </tr>
-            `).join('');
-            
-            document.getElementById('siswaCount').innerText = `${data.length} siswa ditampilkan`;
-            
-            // Event klik baris
-            document.querySelectorAll('#siswaTbody tr').forEach(row => {
-                row.addEventListener('click', () => {
-                    const nisn = row.dataset.nisn;
-                    showSiswaModal(nisn);
-                });
-            });
-        }
-
-        function filterSiswa() {
-            let filtered = [...dataSiswaFull];
-            const search = document.getElementById('searchNama').value.toLowerCase();
-            const kelas = document.getElementById('filterKelas').value;
-            
-            if (search) filtered = filtered.filter(s => s['NAMA SISWA'].toLowerCase().includes(search));
-            if (kelas !== 'all') filtered = filtered.filter(s => s.KELAS === kelas);
-            
-            renderSiswa(filtered);
-        }
-
-        document.getElementById('applyFilter').addEventListener('click', filterSiswa);
-        document.getElementById('resetFilter').addEventListener('click', () => {
-            document.getElementById('searchNama').value = '';
-            document.getElementById('filterKelas').value = 'all';
-            renderSiswa(dataSiswaFull);
+async function loadDataSiswa() {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEETS.profil}/gviz/tq?tqx=out:csv&sheet=data_siswa`;
+    const { headers, rows } = await fetchCSV(url);
+    
+    if (headers.length > 0) {
+        // Header sudah statis di HTML, tidak perlu digenerate ulang
+        
+        dataSiswaFull = rows.map(row => {
+            let obj = {};
+            headers.forEach((h, i) => obj[h] = row[i] || '-');
+            return obj;
         });
+        
+        renderSiswa(dataSiswaFull);
+        showToast(`Memuat ${dataSiswaFull.length} siswa`);
+    } else {
+        document.getElementById('siswaTbody').innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ef4444;"></i>
+                    <p style="margin-top: 1rem; color: var(--slate);">Gagal memuat data</p>
+                </td>
+            </tr>
+        `;
+    }
+}
 
-        // ==================== MODAL PROFIL SISWA ====================
-        async function showSiswaModal(nisn) {
-            const siswa = dataSiswaFull.find(s => s.NISN === nisn) || {};
-            
-            // Ambil data nilai dari sheet Rekap_Nilai
-            const urlNilai = `https://docs.google.com/spreadsheets/d/${SHEETS.nilai}/gviz/tq?tqx=out:csv&sheet=Rekap_Nilai`;
-            const { rows } = await fetchCSV(urlNilai);
-            const nilaiSiswa = rows.find(row => row[0] === nisn) || [];
-            
-            document.getElementById('modalSiswaNama').innerText = `Profil Siswa - ${siswa['NAMA SISWA'] || 'Unknown'}`;
-            
-            let nilaiHtml = '<tr><td colspan="5" style="text-align:center;">Data nilai tidak tersedia</td></tr>';
-            if (nilaiSiswa.length >= 8) {
-                nilaiHtml = `
-                    <tr>
-                        <td>${nilaiSiswa[3] || '-'}</td>
-                        <td>${nilaiSiswa[4] || '-'}</td>
-                        <td>${nilaiSiswa[5] || '-'}</td>
-                        <td>${nilaiSiswa[6] || '-'}</td>
-                        <td>${nilaiSiswa[7] || '-'}</td>
-                    </tr>
-                `;
-            }
-            
-            document.getElementById('modalSiswaContent').innerHTML = `
-                <table style="width:100%; margin-bottom:1.5rem;">
-                    <tr><td style="font-weight:600;">NISN</td><td>${siswa.NISN || '-'}</td></tr>
-                    <tr><td>Nama Lengkap</td><td>${siswa['NAMA SISWA'] || '-'}</td></tr>
-                    <tr><td>Kelas</td><td>${siswa.KELAS || '-'}</td></tr>
-                    <tr><td>Jenis Kelamin</td><td>${siswa['JENIS KELAMIN'] || '-'}</td></tr>
-                    <tr><td>Status</td><td>${siswa['STATUS SISWA'] || '-'}</td></tr>
-                    <tr><td>No WA Ortu</td><td>${siswa['NO WA ORTU'] || '-'}</td></tr>
-                </table>
-                <h3 style="color:var(--navy); margin-bottom:1rem;">📊 Rekap Nilai</h3>
-                <table style="width:100%;">
-                    <tr><th>Nilai Harian</th><th>Nilai Ulangan</th><th>Nilai PTS</th><th>Nilai PAS</th><th>Nilai Rapor</th></tr>
-                    ${nilaiHtml}
-                </table>
-            `;
-            
-            document.getElementById('modalSiswa').classList.add('active');
+function renderSiswa(data) {
+    const tbody = document.getElementById('siswaTbody');
+    
+    if (!data || data.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-users-slash" style="font-size: 2rem; color: var(--gold);"></i>
+                    <p style="margin-top: 1rem; color: var(--slate);">Tidak ada data siswa</p>
+                </td>
+            </tr>
+        `;
+        document.getElementById('siswaCountText').innerText = '0 siswa';
+        return;
+    }
+    
+    tbody.innerHTML = data.map((s, index) => {
+        // Format status dengan badge yang indah
+        let statusBadge = '';
+        if (s['STATUS SISWA'] === 'Aktif') {
+            statusBadge = '<span style="background: #10b981; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 0.2rem;"></i> Aktif</span>';
+        } else if (s['STATUS SISWA'] === 'Tidak Aktif') {
+            statusBadge = '<span style="background: #ef4444; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-times-circle" style="margin-right: 0.2rem;"></i> Tidak Aktif</span>';
+        } else {
+            statusBadge = `<span style="background: #6b7280; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem;">${s['STATUS SISWA'] || '-'}</span>`;
         }
+        
+        // Format jenis kelamin dengan icon
+        let jkIcon = '';
+        if (s['JENIS KELAMIN'] === 'L') {
+            jkIcon = '<i class="fas fa-mars" style="color: #3b82f6;"></i> L';
+        } else if (s['JENIS KELAMIN'] === 'P') {
+            jkIcon = '<i class="fas fa-venus" style="color: #ec4899;"></i> P';
+        } else {
+            jkIcon = s['JENIS KELAMIN'] || '-';
+        }
+        
+        // Format nomor WA dengan icon
+        let waIcon = s['NO WA ORTU'] && s['NO WA ORTU'] !== '-' ? 
+            `<a href="https://wa.me/${s['NO WA ORTU'].replace(/[^0-9]/g, '')}" target="_blank" style="color: #25D366; text-decoration: none;" title="Chat via WhatsApp">
+                <i class="fab fa-whatsapp"></i> ${s['NO WA ORTU']}
+            </a>` : 
+            '<span style="color: var(--slate);">-</span>';
+        
+        return `
+            <tr data-nisn="${s.NISN || ''}" style="cursor: pointer; transition: all 0.2s ease;" data-index="${index}">
+                <td style="font-weight: 500; color: var(--navy);"><i class="fas fa-id-card" style="color: var(--gold); margin-right: 0.5rem; opacity: 0.7;"></i>${s.NISN || '-'}</td>
+                <td style="font-weight: 500;"><i class="fas fa-user-graduate" style="color: var(--navy); margin-right: 0.5rem; opacity: 0.7;"></i>${s['NAMA SISWA'] || '-'}</td>
+                <td><span style="background: #e9eef3; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: var(--navy);"><i class="fas fa-layer-group" style="color: var(--gold); margin-right: 0.3rem;"></i>${s.KELAS || '-'}</span></td>
+                <td>${jkIcon}</td>
+                <td>${statusBadge}</td>
+                <td>${waIcon}</td>
+            </tr>
+        `;
+    }).join('');
+    
+    document.getElementById('siswaCountText').innerHTML = `<i class="fas fa-users"></i> ${data.length} siswa ditampilkan`;
+    
+    // Event klik baris
+    document.querySelectorAll('#siswaTbody tr').forEach(row => {
+        row.addEventListener('click', (e) => {
+            // Jangan trigger jika klik link WhatsApp
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+            
+            const nisn = row.dataset.nisn;
+            if (nisn) showSiswaModal(nisn);
+        });
+    });
+}
 
-        // ==================== TAB JURNAL (3 CARD + DETAIL) ====================
+function filterSiswa() {
+    let filtered = [...dataSiswaFull];
+    const search = document.getElementById('searchNama').value.toLowerCase().trim();
+    const kelas = document.getElementById('filterKelas').value;
+    
+    if (search) {
+        filtered = filtered.filter(s => 
+            s['NAMA SISWA'] && s['NAMA SISWA'].toLowerCase().includes(search)
+        );
+    }
+    
+    if (kelas !== 'all') {
+        filtered = filtered.filter(s => s.KELAS === kelas);
+    }
+    
+    renderSiswa(filtered);
+    
+    if (filtered.length !== dataSiswaFull.length) {
+        showToast(`Menampilkan ${filtered.length} dari ${dataSiswaFull.length} siswa`);
+    }
+}
+
+document.getElementById('applyFilter').addEventListener('click', filterSiswa);
+
+document.getElementById('resetFilter').addEventListener('click', () => {
+    document.getElementById('searchNama').value = '';
+    document.getElementById('filterKelas').value = 'all';
+    renderSiswa(dataSiswaFull);
+    showToast('Filter direset');
+});
+
+// Debounce untuk search (opsional, agar tidak terlalu berat)
+let searchTimeout;
+document.getElementById('searchNama').addEventListener('keyup', () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(filterSiswa, 300);
+});
+
+        // ==================== TAB JURNAL ====================
         const jurnalCards = [
             { 
                 title: 'Jurnal Mengajar', 
                 sheet: 'Log_Jurnal',
-                icon: '📝',
+                icon: '<i class="fas fa-book-open"></i>',
                 desc: 'Catatan harian mengajar',
                 url: `https://docs.google.com/spreadsheets/d/${SHEETS.jurnal}/gviz/tq?tqx=out:csv&sheet=Log_Jurnal`
             },
             { 
                 title: 'Absensi Siswa', 
                 sheet: 'Log_Absensi',
-                icon: '📋',
+                icon: '<i class="fas fa-clipboard-list"></i>',
                 desc: 'Data kehadiran siswa',
                 url: `https://docs.google.com/spreadsheets/d/${SHEETS.jurnal}/gviz/tq?tqx=out:csv&sheet=Log_Absensi`
             },
             { 
                 title: 'Rekap Jurnal', 
                 sheet: 'Final_Jurnal',
-                icon: '📊',
+                icon: '<i class="fas fa-chart-pie"></i>',
                 desc: 'Rekapitulasi jurnal',
                 url: `https://docs.google.com/spreadsheets/d/${SHEETS.jurnal}/gviz/tq?tqx=out:csv&sheet=Final_Jurnal`
             }
@@ -444,7 +1369,6 @@
                 </div>
             `).join('');
 
-            // Event klik card
             document.querySelectorAll('.jurnal-card').forEach(card => {
                 card.addEventListener('click', async () => {
                     const url = card.dataset.url;
@@ -455,22 +1379,19 @@
         }
 
         async function showJurnalDetail(url, title) {
-            // Sembunyikan grid, tampilkan detail
             document.getElementById('jurnalGridContainer').style.display = 'none';
             document.getElementById('jurnalDetailContainer').classList.add('active');
+            document.getElementById('jurnalDetailTitle').innerHTML = `<i class="fas fa-file-alt" style="color: var(--gold);"></i> ${title}`;
             
-            // Set title
-            document.getElementById('jurnalDetailTitle').innerText = title;
-            
-            // Fetch data
             const { headers, rows } = await fetchCSV(url);
             
             if (headers.length > 0) {
-                const thead = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+                const thead = '<tr>' + headers.map(h => `<th><i class="fas fa-table"></i> ${h}</th>`).join('') + '</tr>';
                 const tbody = rows.map(row => '<tr>' + row.map(cell => `<td>${cell || '-'}</td>`).join('') + '</tr>').join('');
                 
                 document.getElementById('jurnalDetailThead').innerHTML = thead;
                 document.getElementById('jurnalDetailTbody').innerHTML = tbody;
+                showToast(`Memuat ${rows.length} data`);
             } else {
                 document.getElementById('jurnalDetailThead').innerHTML = '<tr><th>Data tidak tersedia</th></tr>';
                 document.getElementById('jurnalDetailTbody').innerHTML = '';
@@ -484,15 +1405,15 @@
 
         document.getElementById('backToJurnalGrid').addEventListener('click', showJurnalGrid);
 
-        // ==================== TAB NILAI (7 CARD LINK) ====================
+        // ==================== TAB NILAI ====================
         const nilaiCards = [
-            { nama:'Nilai Harian', file:'nilai/nilai-harian.html', icon:'📘', count:116 },
-            { nama:'Nilai Ulangan', file:'nilai/nilai-ulangan.html', icon:'📙', count:116 },
-            { nama:'Nilai PTS', file:'nilai/nilai-pts.html', icon:'📗', count:116 },
-            { nama:'Remedial PTS', file:'nilai/remedial-pts.html', icon:'📕', count:40 },
-            { nama:'Nilai PAS', file:'nilai/nilai-pas.html', icon:'📘', count:116 },
-            { nama:'Remedial PAS', file:'nilai/remedial-pas.html', icon:'📙', count:39 },
-            { nama:'Rekap Nilai', file:'nilai/rekap-nilai.html', icon:'📊', count:116, rekap:true }
+            { nama:'Nilai Harian', file:'nilai/nilai-harian.html', icon:'<i class="fas fa-pencil-alt"></i>', count:116 },
+            { nama:'Nilai Ulangan', file:'nilai/nilai-ulangan.html', icon:'<i class="fas fa-question-circle"></i>', count:116 },
+            { nama:'Nilai PTS', file:'nilai/nilai-pts.html', icon:'<i class="fas fa-chart-line"></i>', count:116 },
+            { nama:'Remedial PTS', file:'nilai/remedial-pts.html', icon:'<i class="fas fa-exclamation-triangle"></i>', count:40 },
+            { nama:'Nilai PAS', file:'nilai/nilai-pas.html', icon:'<i class="fas fa-chart-bar"></i>', count:116 },
+            { nama:'Remedial PAS', file:'nilai/remedial-pas.html', icon:'<i class="fas fa-exclamation-circle"></i>', count:39 },
+            { nama:'Rekap Nilai', file:'nilai/rekap-nilai.html', icon:'<i class="fas fa-star"></i>', count:116, rekap:true }
         ];
 
         function renderNilaiCards() {
@@ -500,26 +1421,27 @@
             grid.innerHTML = nilaiCards.map(card => {
                 const rekapClass = card.rekap ? 'rekap' : '';
                 return `
-                    <a href="${card.file}" class="nilai-card ${rekapClass}">
+                    <a href="${card.file}" class="nilai-card ${rekapClass}" onclick="return handleNilaiLink(event, this)">
                         <div class="nilai-icon">${card.icon}</div>
                         <h3>${card.nama}</h3>
-                        <p>${card.count} data</p>
+                        <p><i class="fas fa-database"></i> ${card.count} data</p>
                     </a>
                 `;
             }).join('');
         }
 
+        // ==================== HANDLE LINK ====================
+        window.handleNilaiLink = function(event, element) {
+            showToast('Membuka halaman nilai...');
+            return true;
+        };
+
         // ==================== INIT ====================
-        // Load data siswa di background
         loadDataSiswa();
-        
-        // Render jurnal cards
         renderJurnalCards();
-        
-        // Render nilai cards
         renderNilaiCards();
 
-        // Tutup modal siswa
+        // Tutup modal
         document.getElementById('closeSiswaModal').addEventListener('click', () => {
             document.getElementById('modalSiswa').classList.remove('active');
         });
@@ -530,9 +1452,33 @@
             }
         });
 
-        // Link administrasi (ganti nanti)
-        document.getElementById('linkMateri').href = '#';
-        document.getElementById('linkGaleri').href = '#';
+        // Keyboard ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            }
+        });
+
+        // Animasi masuk untuk card
+        setTimeout(() => {
+            document.querySelectorAll('.jurnal-card, .nilai-card, .admin-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        }, 100);
+
+        // Link administrasi
+        document.getElementById('linkMateri').href = 'https://drive.google.com/drive/folders/example';
+        document.getElementById('linkGaleri').href = 'https://photos.app.goo.gl/example';
+        
+        console.log('Halaman guru siap dengan tampilan premium');
     </script>
 </body>
 </html>
