@@ -1196,33 +1196,49 @@ tbody tr:hover td:first-child::before {
         });
 
         // ==================== TAB SISWA ====================
-        // ==================== TAB SISWA ====================
+// ==================== TAB SISWA ====================
 let dataSiswaFull = [];
+let isLoading = false;
 
 async function loadDataSiswa() {
+    if (isLoading) return;
+    isLoading = true;
+    
+    const tbody = document.getElementById('siswaTbody');
+    tbody.innerHTML = `
+        <tr>
+            <td colspan="6" class="table-empty-state">
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 1rem;">Memuat data siswa...</p>
+            </td>
+        </tr>
+    `;
+    
     const url = `https://docs.google.com/spreadsheets/d/${SHEETS.profil}/gviz/tq?tqx=out:csv&sheet=data_siswa`;
     const { headers, rows } = await fetchCSV(url);
     
     if (headers.length > 0) {
-        // Header sudah statis di HTML, tidak perlu digenerate ulang
-        
         dataSiswaFull = rows.map(row => {
             let obj = {};
             headers.forEach((h, i) => obj[h] = row[i] || '-');
             return obj;
         });
         
-        renderSiswa(dataSiswaFull);
-        showToast(`Memuat ${dataSiswaFull.length} siswa`);
+        // Render dengan sedikit delay agar smooth
+        setTimeout(() => {
+            renderSiswa(dataSiswaFull);
+            isLoading = false;
+        }, 300);
     } else {
-        document.getElementById('siswaTbody').innerHTML = `
+        tbody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align: center; padding: 3rem;">
-                    <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ef4444;"></i>
-                    <p style="margin-top: 1rem; color: var(--slate);">Gagal memuat data</p>
+                <td colspan="6" class="table-empty-state">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Gagal memuat data</p>
                 </td>
             </tr>
         `;
+        isLoading = false;
     }
 }
 
@@ -1232,92 +1248,132 @@ function renderSiswa(data) {
     if (!data || data.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align: center; padding: 3rem;">
-                    <i class="fas fa-users-slash" style="font-size: 2rem; color: var(--gold);"></i>
-                    <p style="margin-top: 1rem; color: var(--slate);">Tidak ada data siswa</p>
+                <td colspan="6" class="table-empty-state">
+                    <i class="fas fa-users-slash"></i>
+                    <p>Tidak ada data siswa</p>
                 </td>
             </tr>
         `;
-        document.getElementById('siswaCountText').innerText = '0 siswa';
+        document.getElementById('siswaCountText').innerHTML = '<i class="fas fa-database"></i> 0 siswa';
         return;
     }
     
-    tbody.innerHTML = data.map((s, index) => {
-        // Format status dengan badge yang indah
-        let statusBadge = '';
-        if (s['STATUS SISWA'] === 'Aktif') {
-            statusBadge = '<span style="background: #10b981; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 0.2rem;"></i> Aktif</span>';
-        } else if (s['STATUS SISWA'] === 'Tidak Aktif') {
-            statusBadge = '<span style="background: #ef4444; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-times-circle" style="margin-right: 0.2rem;"></i> Tidak Aktif</span>';
-        } else {
-            statusBadge = `<span style="background: #6b7280; color: white; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.75rem;">${s['STATUS SISWA'] || '-'}</span>`;
-        }
+    // Gunakan DocumentFragment untuk render lebih cepat
+    const fragment = document.createDocumentFragment();
+    
+    data.forEach((s, index) => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-nisn', s.NISN || '');
+        row.setAttribute('data-index', index);
+        row.style.cursor = 'pointer';
+        row.style.transition = 'all 0.2s ease';
         
-        // Format jenis kelamin dengan icon
-        let jkIcon = '';
+        // NISN
+        const cellNISN = document.createElement('td');
+        cellNISN.innerHTML = `<i class="fas fa-id-card" style="color: var(--gold); margin-right: 0.5rem;"></i>${s.NISN || '-'}`;
+        cellNISN.style.fontWeight = '500';
+        cellNISN.style.color = 'var(--navy)';
+        
+        // Nama
+        const cellNama = document.createElement('td');
+        cellNama.innerHTML = `<i class="fas fa-user-graduate" style="color: var(--navy); margin-right: 0.5rem;"></i>${s['NAMA SISWA'] || '-'}`;
+        cellNama.style.fontWeight = '500';
+        
+        // Kelas
+        const cellKelas = document.createElement('td');
+        cellKelas.innerHTML = `<span class="kelas-badge"><i class="fas fa-layer-group"></i>${s.KELAS || '-'}</span>`;
+        
+        // Jenis Kelamin
+        const cellJK = document.createElement('td');
         if (s['JENIS KELAMIN'] === 'L') {
-            jkIcon = '<i class="fas fa-mars" style="color: #3b82f6;"></i> L';
+            cellJK.innerHTML = '<i class="fas fa-mars" style="color: #3b82f6; margin-right: 0.3rem;"></i> Laki-laki';
         } else if (s['JENIS KELAMIN'] === 'P') {
-            jkIcon = '<i class="fas fa-venus" style="color: #ec4899;"></i> P';
+            cellJK.innerHTML = '<i class="fas fa-venus" style="color: #ec4899; margin-right: 0.3rem;"></i> Perempuan';
         } else {
-            jkIcon = s['JENIS KELAMIN'] || '-';
+            cellJK.textContent = s['JENIS KELAMIN'] || '-';
         }
         
-        // Format nomor WA dengan icon
-        let waIcon = s['NO WA ORTU'] && s['NO WA ORTU'] !== '-' ? 
-            `<a href="https://wa.me/${s['NO WA ORTU'].replace(/[^0-9]/g, '')}" target="_blank" style="color: #25D366; text-decoration: none;" title="Chat via WhatsApp">
-                <i class="fab fa-whatsapp"></i> ${s['NO WA ORTU']}
-            </a>` : 
-            '<span style="color: var(--slate);">-</span>';
+        // Status
+        const cellStatus = document.createElement('td');
+        let statusClass = 'status-badge';
+        if (s['STATUS SISWA'] === 'Aktif') {
+            statusClass += ' aktif';
+            cellStatus.innerHTML = `<span class="${statusClass}"><i class="fas fa-check-circle"></i> Aktif</span>`;
+        } else if (s['STATUS SISWA'] === 'Tidak Aktif') {
+            statusClass += ' tidak-aktif';
+            cellStatus.innerHTML = `<span class="${statusClass}"><i class="fas fa-times-circle"></i> Tidak Aktif</span>`;
+        } else {
+            statusClass += ' lainnya';
+            cellStatus.innerHTML = `<span class="${statusClass}">${s['STATUS SISWA'] || '-'}</span>`;
+        }
         
-        return `
-            <tr data-nisn="${s.NISN || ''}" style="cursor: pointer; transition: all 0.2s ease;" data-index="${index}">
-                <td style="font-weight: 500; color: var(--navy);"><i class="fas fa-id-card" style="color: var(--gold); margin-right: 0.5rem; opacity: 0.7;"></i>${s.NISN || '-'}</td>
-                <td style="font-weight: 500;"><i class="fas fa-user-graduate" style="color: var(--navy); margin-right: 0.5rem; opacity: 0.7;"></i>${s['NAMA SISWA'] || '-'}</td>
-                <td><span style="background: #e9eef3; padding: 0.25rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: var(--navy);"><i class="fas fa-layer-group" style="color: var(--gold); margin-right: 0.3rem;"></i>${s.KELAS || '-'}</span></td>
-                <td>${jkIcon}</td>
-                <td>${statusBadge}</td>
-                <td>${waIcon}</td>
-            </tr>
-        `;
-    }).join('');
+        // No WA
+        const cellWA = document.createElement('td');
+        if (s['NO WA ORTU'] && s['NO WA ORTU'] !== '-') {
+            const waNumber = s['NO WA ORTU'].replace(/[^0-9]/g, '');
+            cellWA.innerHTML = `<a href="https://wa.me/${waNumber}" target="_blank" class="wa-link" title="Chat via WhatsApp"><i class="fab fa-whatsapp"></i> ${s['NO WA ORTU']}</a>`;
+        } else {
+            cellWA.innerHTML = '<span style="color: var(--slate);">-</span>';
+        }
+        
+        row.appendChild(cellNISN);
+        row.appendChild(cellNama);
+        row.appendChild(cellKelas);
+        row.appendChild(cellJK);
+        row.appendChild(cellStatus);
+        row.appendChild(cellWA);
+        
+        fragment.appendChild(row);
+    });
     
-    document.getElementById('siswaCountText').innerHTML = `<i class="fas fa-users"></i> ${data.length} siswa ditampilkan`;
+    // Kosongkan tbody dan tambahkan fragment (lebih cepat)
+    tbody.innerHTML = '';
+    tbody.appendChild(fragment);
     
-    // Event klik baris
-    document.querySelectorAll('#siswaTbody tr').forEach(row => {
-        row.addEventListener('click', (e) => {
-            // Jangan trigger jika klik link WhatsApp
-            if (e.target.tagName === 'A' || e.target.closest('a')) return;
-            
-            const nisn = row.dataset.nisn;
-            if (nisn) showSiswaModal(nisn);
-        });
+    // Update counter
+    document.getElementById('siswaCountText').innerHTML = `<i class="fas fa-database"></i> ${data.length} siswa ditampilkan`;
+    
+    // Event klik baris dengan delegasi event (lebih efisien)
+    tbody.addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        if (!row) return;
+        
+        // Jangan trigger jika klik link
+        if (e.target.closest('a')) return;
+        
+        const nisn = row.dataset.nisn;
+        if (nisn) showSiswaModal(nisn);
     });
 }
 
+// Debounce filter
+let filterTimeout;
 function filterSiswa() {
-    let filtered = [...dataSiswaFull];
-    const search = document.getElementById('searchNama').value.toLowerCase().trim();
-    const kelas = document.getElementById('filterKelas').value;
-    
-    if (search) {
-        filtered = filtered.filter(s => 
-            s['NAMA SISWA'] && s['NAMA SISWA'].toLowerCase().includes(search)
-        );
-    }
-    
-    if (kelas !== 'all') {
-        filtered = filtered.filter(s => s.KELAS === kelas);
-    }
-    
-    renderSiswa(filtered);
-    
-    if (filtered.length !== dataSiswaFull.length) {
-        showToast(`Menampilkan ${filtered.length} dari ${dataSiswaFull.length} siswa`);
-    }
+    clearTimeout(filterTimeout);
+    filterTimeout = setTimeout(() => {
+        let filtered = [...dataSiswaFull];
+        const search = document.getElementById('searchNama').value.toLowerCase().trim();
+        const kelas = document.getElementById('filterKelas').value;
+        
+        if (search) {
+            filtered = filtered.filter(s => 
+                s['NAMA SISWA'] && s['NAMA SISWA'].toLowerCase().includes(search)
+            );
+        }
+        
+        if (kelas !== 'all') {
+            filtered = filtered.filter(s => s.KELAS === kelas);
+        }
+        
+        renderSiswa(filtered);
+        
+        if (filtered.length !== dataSiswaFull.length) {
+            showToast(`Menampilkan ${filtered.length} dari ${dataSiswaFull.length} siswa`);
+        }
+    }, 300); // Debounce 300ms
 }
 
+// Event listeners
 document.getElementById('applyFilter').addEventListener('click', filterSiswa);
 
 document.getElementById('resetFilter').addEventListener('click', () => {
@@ -1327,12 +1383,7 @@ document.getElementById('resetFilter').addEventListener('click', () => {
     showToast('Filter direset');
 });
 
-// Debounce untuk search (opsional, agar tidak terlalu berat)
-let searchTimeout;
-document.getElementById('searchNama').addEventListener('keyup', () => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(filterSiswa, 300);
-});
+document.getElementById('searchNama').addEventListener('input', filterSiswa);
 
         // ==================== TAB JURNAL ====================
         const jurnalCards = [
