@@ -36,6 +36,8 @@
             font-size: 2rem;
             text-decoration: none;
             transition: 0.2s;
+            border: none;
+            cursor: pointer;
         }
         .back-btn:hover { background: #1d3a5c; transform: translateX(-3px); }
         .title { font-size: 1.8rem; color: var(--navy); font-weight: 600; }
@@ -194,7 +196,7 @@
     <div class="container">
         <!-- HEADER -->
         <div class="header">
-            <a href="https://azhibnmjkfr.github.io/iGuru-DTI/guru/azh12345/azh12345.html" class="back-btn">←</a>
+            <button onclick="window.history.back()" class="back-btn">←</button>
             <div class="title">
                 📙 Nilai Ulangan
             </div>
@@ -405,3 +407,4 @@
 </body>
 
 </html>
+
